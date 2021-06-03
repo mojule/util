@@ -1,0 +1,21 @@
+{
+  "name": "@mojule/util",
+  "version": "0.1.0",
+  "description": "Utility functions",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf dist && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mojule/util.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mojule/util/issues"
+  },
+  "homepage": "https://github.com/mojule/util#readme"
+}
