@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.objectFilter = exports.objectExcept = exports.emptyObject = void 0;
+exports.traverseObject = exports.isObjectLeaf = exports.objectFilter = exports.objectExcept = exports.emptyObject = void 0;
 const emptyObject = (obj) => {
     Object.keys(obj).forEach(key => {
         delete obj[key];
@@ -27,4 +27,33 @@ const objectFilter = (obj, predicate) => {
     return result;
 };
 exports.objectFilter = objectFilter;
+const isObjectLeaf = (value) => typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean' ||
+    value === null;
+exports.isObjectLeaf = isObjectLeaf;
+const onTraverse = (value, pointer, root, parent, cb) => {
+    cb(value, pointer, root, parent);
+    if (exports.isObjectLeaf(value))
+        return;
+    const traverseChild = (item, key) => {
+        const itemPointer = (pointer.endsWith('/') ?
+            `${pointer}${key}` :
+            `${pointer}/${key}`);
+        onTraverse(item, itemPointer, root, value, cb);
+    };
+    if (Array.isArray(value)) {
+        value.forEach(traverseChild);
+        return;
+    }
+    if (value) {
+        const keys = Object.keys(value);
+        keys.forEach(key => {
+            const item = value[key];
+            traverseChild(item, key);
+        });
+    }
+};
+const traverseObject = (value, cb) => onTraverse(value, '/', value, null, cb);
+exports.traverseObject = traverseObject;
 //# sourceMappingURL=object.js.map

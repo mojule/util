@@ -23,3 +23,9 @@ export interface ObjectMapEachCallback<T> {
 export interface ObjectMapMapCallback<T, U> {
   ( value: T, key: string ): U
 }
+
+export type TraverseObjectCallback = (
+  value: any, pointer: string, root: any, parent: any
+) => void
+
+export type ObjectLeaf = string | number | boolean | null

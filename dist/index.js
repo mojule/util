@@ -15,6 +15,7 @@ __exportStar(require("./bucket"), exports);
 __exportStar(require("./case"), exports);
 __exportStar(require("./clone"), exports);
 __exportStar(require("./delay-promise"), exports);
+__exportStar(require("./each"), exports);
 __exportStar(require("./error"), exports);
 __exportStar(require("./html-and-text"), exports);
 __exportStar(require("./lodash"), exports);
