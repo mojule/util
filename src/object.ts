@@ -75,3 +75,11 @@ const onTraverse = (
 
 export const traverseObject = ( value: any, cb: TraverseObjectCallback ) => 
   onTraverse( value, '/', value, null, cb )
+  
+export const strictMapGet = <K,T>( map: Map<K,T>, key: K ) => {
+  const value = map.get( key )
+
+  if( value === undefined ) throw Error( `Expected ${ key } in map` )
+
+  return value
+}

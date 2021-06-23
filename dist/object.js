@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.traverseObject = exports.isObjectLeaf = exports.objectFilter = exports.objectExcept = exports.emptyObject = void 0;
+exports.strictMapGet = exports.traverseObject = exports.isObjectLeaf = exports.objectFilter = exports.objectExcept = exports.emptyObject = void 0;
 const emptyObject = (obj) => {
     Object.keys(obj).forEach(key => {
         delete obj[key];
@@ -56,4 +56,11 @@ const onTraverse = (value, pointer, root, parent, cb) => {
 };
 const traverseObject = (value, cb) => onTraverse(value, '/', value, null, cb);
 exports.traverseObject = traverseObject;
+const strictMapGet = (map, key) => {
+    const value = map.get(key);
+    if (value === undefined)
+        throw Error(`Expected ${key} in map`);
+    return value;
+};
+exports.strictMapGet = strictMapGet;
 //# sourceMappingURL=object.js.map
